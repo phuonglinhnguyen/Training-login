@@ -7,17 +7,30 @@ class Login extends Component {
     super(props);
     this.state = {
       type: "input",
-      score: "null"
+      name: false,
+      password: true,
+      err: []
     };
     this.showHide = this.showHide.bind(this);
   }
+
   showHide(e) {
     e.preventDefault();
     e.stopPropagation();
     this.setState({
       type: this.state.type === "input" ? "password" : "input"
-    })
+    });
   }
+  validate = (name, password) => {
+    const err = [];
+    if (name.length === 0) {
+      err.push("Name can't be empty");
+    }
+    if (password.length < 6) {
+      err.push("Password should be at least 6 characters long");
+    }
+    return err;
+  };
 
   render() {
     return (

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+// import ReactDom from 'react-dom';
 import logo from './logo.svg';
 // import Users from './components/usersComponents/userComponents';
-import Login from './components/loginComponents/login';
+// import Login from './components/loginComponents/login';
+import AppRoutes from './routes/AppRouter';
 import './App.css';
 
 
@@ -15,7 +17,8 @@ class App extends Component {
         </div>
         <div className="App-intro">
           {/* <Users /> */}
-          <Login />
+          {/* <Login /> */}
+          <AppRoutes />
         </div>
       </div>
     );

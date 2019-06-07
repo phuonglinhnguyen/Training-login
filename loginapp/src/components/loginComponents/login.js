@@ -1,25 +1,16 @@
 import React, { Component } from "react";
 import "./login.css";
 import iconUser from "./user.png";
-
+// 16.8.6 - hooks
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    type: "input",
+    username: '',
+    password: '',
+    err: []
+  };
 
-    this.state = {
-      type: "input",
-      username: '',
-      password: '',
-      err: []
-    };
-
-    this.showHide = this.showHide.bind(this);
-    this.handlerPassword = this.handlerPassword.bind(this);
-    this.handlerUsername = this.handlerUsername.bind(this);
-  }
-
-
-  showHide(e) {
+  showHide = (e) => {
     e.preventDefault();
     e.stopPropagation();
     this.setState({
@@ -38,24 +29,30 @@ class Login extends Component {
   //   return err;
   // };
 
-  handlerUsername(e) {
+  _onChangeInput = (e) => {
     this.setState({
-      name: e.target.value
+      [e.target.name]: e.target.value
     });
   }
 
-  handlerPassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
-
-  logIn() {
-    console.log("sdsds");
-    // console.log(this.state.name);
+  logIn = () => {
+    const { username, password } = this.state;
+    const {history} = this.props;
+    console.log("Username:" + this.state.username + "-" + this.state.password);
+    // check username, password in backend
+    const checkAuth = username === "linh" && password === "123"
+    if (checkAuth) {
+      // yes - chuyen trang user detail
+      history.push('/user-details')//chuyen trang
+    } else {
+      // no - thong bao username/password k dung
+      alert("Sai username password");
+    }
   }
 
   render() {
+    console.log(this.props);
+
     return (
       <div className="Login">
         <form className="loginform">
@@ -63,8 +60,8 @@ class Login extends Component {
           <img className="iconUser" src={iconUser} alt="icon user" />
           <div className="input-login">
             <input
-              id="inputUsername"
-              onChange={this.handlerUsername}
+              name="username"
+              onChange={this._onChangeInput}
               className="input-items"
               type="text"
               value={this.state.name}
@@ -73,11 +70,11 @@ class Login extends Component {
             />
             <div className="pwd-items">
               <input
-                id="inputPassword"
-                onChange={this.handlerPassword}
+                name="password"
+                onChange={this._onChangeInput}
                 className="input-items"
                 type={this.state.type}
-                value={this.state.password} 
+                value={this.state.password}
                 placeholder="password"
                 required
               />

@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import "./userDetail.css";
 
+const hung = {
+  username: 'hung',
+  email:'abc@gmail.com',
+  address:'asdassfff'
+}
+
 class UserDetails extends Component {
   constructor(props) {
     super(props);
@@ -11,8 +17,9 @@ class UserDetails extends Component {
     return (
       <div className="info-details">
         <h3>User Details</h3>
-        <span>User name</span>
-        <span>Password</span>
+        <span>User name is {hung.username}</span>
+        <span>Email: {hung.email}</span>
+        <span>Address: {hung.address}</span>
       </div>
     );
   }

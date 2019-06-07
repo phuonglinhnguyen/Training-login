@@ -1,108 +1,112 @@
 import React, { Component } from "react";
+// import MaterialTable from "material-table";
+import CustomizedDialogs from "../tableComponents/dialog";
 
 class AdminUsers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'add',
+      mode: "add",
       selectedUser: {},
-      users: [{
-        username: 'hung',
-        email: 'abc@gmail.com',
-        address: 'asdassfff'
-      }, {
-        username: 'linh',
-        email: 'abddc@gmail.com',
-        address: 'dfdfdf'
-      }
-        ,
-      {
-        username: 'linh11',
-        email: 'abddsdc@gmail.com',
-        address: 'dfdfdf'
-      }]
+      users: [
+        {
+          username: "hung",
+          email: "abc@gmail.com",
+          address: "asdassfff"
+        },
+        {
+          username: "linh",
+          email: "abddc@gmail.com",
+          address: "dfdfdf"
+        },
+        {
+          username: "linh11",
+          email: "abddsdc@gmail.com",
+          address: "dfdfdf"
+        }
+      ]
     };
   }
 
-  _onChangeSelectedUser = (e) => {
-    const { selectedUser } = this.state
+  _onChangeSelectedUser = e => {
+    const { selectedUser } = this.state;
     this.setState({
       selectedUser: {
         ...selectedUser,
         [e.target.name]: e.target.value
       }
-    })
-  }
+    });
+  };
 
   _onSave = () => {
-    const { mode, users, selectedUser } = this.state
+    const { mode, users, selectedUser } = this.state;
 
-    if (mode === 'add') {
+    if (mode === "add") {
       const newUsers = [...users, selectedUser];
       this.setState({
         users: newUsers,
         selectedUser: {
-          username: '',
-          address: ''
-        },
-      })
-    } else if (mode === 'update') {
+          username: "",
+          address: ""
+        }
+      });
+    } else if (mode === "update") {
       const newUsers = users.map(user => {
         if (user.username === selectedUser.username) {
-          user = {...selectedUser} //
+          user = { ...selectedUser }; //
         }
-        return user
-      })
+        return user;
+      });
 
       this.setState({
         users: newUsers,
-        mode: 'add',
+        mode: "add",
         selectedUser: {
-          username: '',
-          address: ''
-        },
-      })
+          username: "",
+          address: ""
+        }
+      });
     }
-  }
+  };
 
-  _onUpdate = (user) => {
+  _onUpdate = user => {
     this.setState({
-      mode: 'update',
+      mode: "update",
       selectedUser: user
-    })
-  }
+    });
+  };
 
-  _onDelete = (user) => {
+  _onDelete = user => {
     // dung filter
-  }
+  };
 
   render() {
-    const { selectedUser, users, mode } = this.state
+    // const { selectedUser, users, mode } = this.state;
+    const { users } = this.state;
     return (
       <div className="manage-users">
-        <div className='mb-2'>
+        {/* <div className="mb-2">
           <div>
             <label>username: </label>
             <input
-              name='username'
+              name="username"
               value={selectedUser.username}
               onChange={this._onChangeSelectedUser}
-              disabled={mode !== 'add'}
+              disabled={mode !== "add"}
             />
           </div>
           <div>
             <label>address: </label>
             <input
-              name='address'
+              name="address"
               value={selectedUser.address}
               onChange={this._onChangeSelectedUser}
             />
           </div>
-          <button
-            className="btn btn-success"
-            onClick={this._onSave}
-          >{this.state.mode === 'add' ? 'Save' : 'Update'}</button>
-        </div>
+          <button className="btn btn-success" onClick={this._onSave}>
+            {this.state.mode === "add" ? "Save" : "Update"}
+          </button>
+        </div> */}
 
         <table className="table">
           <thead className="thead-dark">
@@ -115,32 +119,31 @@ class AdminUsers extends Component {
             </tr>
           </thead>
           <tbody>
-            {
-              users.map((user, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>{user.address}</td>
-                    <td>
-                      <button
-                        onClick={() => this._onUpdate(user)}
-                      >Sua</button>
+            {users.map((user, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.address}</td>
+                  <td>
+                    <span onClick={() => this._onUpdate(user)}>
+                      <i
+                        className="fa fa-pencil-square-o items"
+                        aria-hidden="true"
+                      />
+                    </span>
 
-                      <button
-                        onClick={() => this._onDelete(user)}
-                      >Xoa</button>
-                    </td>
-                  </tr>
-                )
-              })
-            }
+                    <span onClick={() => this._onDelete(user)}>
+                      <i className="fa fa-trash items" aria-hidden="true" />
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-
-
-
+        <CustomizedDialogs />
       </div>
     );
   }

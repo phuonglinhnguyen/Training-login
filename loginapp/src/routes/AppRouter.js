@@ -1,30 +1,21 @@
 import React from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import Login from "../components/loginComponents/login";
+import { BrowserRouter, Route } from "react-router-dom";
+// import Login from "../components/loginComponents/login";
 import UserDetail from "../components/userDetail/userDetail";
 import AdminUsers from "../components/adminComponents/adminUsers";
-
+import Header from "../components/HeaderComponents/header";
 function AppRouter() {
+  function Home(){
+    return <h1>Hello My Home</h1>
+  }
   return (
     <BrowserRouter>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Login</Link>
-            </li>
-            <li>
-              <Link to="/user-details/">Users Details</Link>
-            </li>
-            <li>
-              <Link to="/admin-users/">Users</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header/>
 
-        <Route path="/" exact component={Login} />
+        <Route path="/" exact component={Home} />
         <Route path="/user-details/" component={UserDetail} />
-        <Route path="/admin-users/" component={AdminUsers} />
+        <Route path="/manage-users/" component={AdminUsers} />
       </div>
     </BrowserRouter>
   );

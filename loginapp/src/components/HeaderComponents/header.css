@@ -1,0 +1,31 @@
+.nav-header {
+    /* background-color: #edc3c5; */
+    padding:10px;
+    text-align: right !important;
+}
+.login-dialog{
+    text-align: center;
+}
+.items-header{
+    font-weight: bold;
+    padding: 5px;
+}
+.des {
+    padding-top: 10px;
+}
+.items-header:hover{
+    background-color: #dccbc7;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white !important;
+}
+.items-header a{
+    color: #222 !important;
+}
+.items-header a:hover{
+    text-decoration: none !important;
+    color: white !important;
+}
+.btnLogin {
+    text-transform: capitalize !important;
+}

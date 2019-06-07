@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./userDetail.css";
 
-const hung = {
-  username: 'hung',
+const users = {
+  username: 'linh',
   email:'abc@gmail.com',
   address:'asdassfff'
 }
@@ -16,10 +16,10 @@ class UserDetails extends Component {
   render() {
     return (
       <div className="info-details">
-        <h3>User Details</h3>
-        <span>User name is {hung.username}</span>
-        <span>Email: {hung.email}</span>
-        <span>Address: {hung.address}</span>
+        <h3>Hello {users.username}</h3>
+        <span>User name is {users.username}</span><br/>
+        <span>Email: {users.email}</span><br/>
+        <span>Address: {users.address}</span><br/>
       </div>
     );
   }

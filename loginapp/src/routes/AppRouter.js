@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 // import Login from "../components/loginComponents/login";
 import UserDetail from "../components/userDetail/userDetail";
-import AdminUsers from "../components/adminComponents/adminUsers";
+import AdminUser from "../components/adminComponents/adminUser";
 import Header from "../components/HeaderComponents/header";
 function AppRouter() {
   function Home(){
@@ -15,7 +15,7 @@ function AppRouter() {
 
         <Route path="/" exact component={Home} />
         <Route path="/user-details/" component={UserDetail} />
-        <Route path="/manage-users/" component={AdminUsers} />
+        <Route path="/manage-users/" component={AdminUser} />
       </div>
     </BrowserRouter>
   );

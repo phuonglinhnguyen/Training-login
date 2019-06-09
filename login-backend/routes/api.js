@@ -50,7 +50,9 @@ router.post('/users', (req, res) => {
 })
 
 router.delete('/users/:id', (req, res) => {
+  console.log('/users/:id');
   const { id } = req.params
+  console.log(id);
   User.findByIdAndRemove({ _id: id }, (err) => {
     if (err) throw err;
     console.log("User deleted");
@@ -59,11 +61,27 @@ router.delete('/users/:id', (req, res) => {
 })
 
 router.put('/users/:id', (req, res) => {
-  const { id, username } = req.params
-  User.findByIdAndUpdate({ _id: id }, { username }, (err, user) => {
+  console.log('/users/:id');
+  const { id } = req.params
+  const updateValue = req.body
+  console.log(updateValue)
+  User.findOneAndUpdate({ _id: id }, updateValue, (err, user) => {
     if (err) throw err;
     console.log(user);
     res.json(user);
   })
 })
+
+router.post('/users/checkAuth', async (req, res) => {
+  const {username, password} = req.body
+  console.log({username, password})
+  User.findOne({username}, (err, user) => {
+    if(user.password === password) {
+      res.json({ result: true, user })
+    } else {
+      res.json({ result: false })
+    }
+  })
+})
+
 module.exports = router;

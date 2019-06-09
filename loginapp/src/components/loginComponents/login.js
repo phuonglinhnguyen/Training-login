@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom'
+import {connect} from 'react-redux'
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -6,6 +8,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import "./login.css";
 import iconUser from "./user.png";
+import {checkAuth} from './../../reduxStore/userReducer'
+
 // 16.8.6 - hooks
 class Login extends Component {
   state = {
@@ -31,20 +35,14 @@ class Login extends Component {
 
   logIn = () => {
     const { username, password } = this.state;
-    const { history } = this.props;
-    console.log("Username:" + this.state.username + "-" + this.state.password);
-    // check username, password in backend
-    const checkAuth = username === "linh" && password === "123";
-    if (checkAuth) {
-      // yes - chuyen trang user detail
-      history.push("/user-details"); //chuyen trang
-    } else {
-      // no - thong bao username/password k dung
-      alert("Sai username password");
-    }
+    const { history, setOpen, user } = this.props;
+
+    // ---------- check username, password khac rong
+    this.props.checkAuth(username, password, history, setOpen)
   };
 
   render() {
+    console.log(this.props.user)
     return (
       <div className="Login">
         <form className="loginform">
@@ -82,8 +80,8 @@ class Login extends Component {
                         {this.state.type === "input" ? (
                           <VisibilityOff />
                         ) : (
-                          <Visibility />
-                        )}
+                            <Visibility />
+                          )}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -101,4 +99,14 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.defaultProps = {
+  user: null
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps, {checkAuth})(Login));

@@ -6,12 +6,14 @@ import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import "./header.css";
 import Login from "../loginComponents/login";
+import { connect } from 'react-redux'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function Header() {
+const Header = props => {
+  const {user} = props
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -26,7 +28,9 @@ function Header() {
     <div className="nav-header">
       <ul className="nav justify-content-end">
         <li className="items-header">
-          <Button className="btnLogin" onClick={handleClickOpen}>Login</Button>
+          <Button className="btnLogin" onClick={handleClickOpen}>
+            {user === null ? 'Login' : 'Logout'}
+            </Button>
         </li>
 
         <li className="items-header">
@@ -42,7 +46,7 @@ function Header() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <Login />
+        <Login setOpen={setOpen} />
       </Dialog>
     </div>
   );
@@ -68,4 +72,17 @@ function Header() {
   // }
 }
 
-export default Header;
+Header.defaultProps = {
+  user: null
+}
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+  }
+)(Header)

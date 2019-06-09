@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 import "./userDetail.css";
 
 const users = {
   username: 'linh',
-  email:'abc@gmail.com',
-  address:'asdassfff'
+  email: 'abc@gmail.com',
+  address: 'asdassfff'
 }
 
 class UserDetails extends Component {
@@ -14,15 +15,36 @@ class UserDetails extends Component {
   }
 
   render() {
+    const {
+      user
+    } = this.props
+
+    if (user === null) {
+      return <div>Not log in</div>
+    }
+
     return (
       <div className="info-details">
-        <h3>Hello {users.username}</h3>
-        <span>User name is {users.username}</span><br/>
-        <span>Email: {users.email}</span><br/>
-        <span>Address: {users.address}</span><br/>
+        <h3>Hello {user.username}</h3>
+        <span>User name is {user.username}</span><br />
+        <span>Email: {user.email}</span><br />
       </div>
     );
   }
 }
 
-export default UserDetails;
+UserDetails.defaultProps = {
+  user: null
+}
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.user
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+  }
+)(UserDetails)

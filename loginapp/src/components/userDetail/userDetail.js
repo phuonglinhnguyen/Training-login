@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import "./userDetail.css";
 
 const users = {
-  username: 'linh',
-  email: 'abc@gmail.com',
-  address: 'asdassfff'
-}
+  username: "linh",
+  email: "abc@gmail.com",
+  address: "asdassfff"
+};
 
 class UserDetails extends Component {
   constructor(props) {
@@ -15,19 +15,21 @@ class UserDetails extends Component {
   }
 
   render() {
-    const {
-      user
-    } = this.props
+    const { user } = this.props;
 
     if (user === null) {
-      return <div>Not log in</div>
+      return <div>Not log in</div>;
     }
 
     return (
-      <div className="info-details">
-        <h3>Hello {user.username}</h3>
-        <span>User name is {user.username}</span><br />
-        <span>Email: {user.email}</span><br />
+      <div className="app-details">
+        <div className="info-details">
+          <h3>Hello {user.username}</h3>
+          <span>User name is {user.username}</span>
+          <br />
+          <span>Email: {user.email}</span>
+          <br />
+        </div>
       </div>
     );
   }
@@ -35,16 +37,15 @@ class UserDetails extends Component {
 
 UserDetails.defaultProps = {
   user: null
-}
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.user.user
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
-  {
-  }
-)(UserDetails)
+  {}
+)(UserDetails);

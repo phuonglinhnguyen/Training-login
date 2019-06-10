@@ -12,7 +12,6 @@ function AppRouter() {
     <BrowserRouter>
       <div>
         <Header/>
-
         <Route path="/" exact component={Home} />
         <Route path="/user-details/" component={UserDetail} />
         <Route path="/manage-users/" component={AdminUser} />

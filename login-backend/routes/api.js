@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('user', userSchema);
 
+
 // /api/users
 router.get('/users', (req, res) => {
   console.log('get users');
@@ -62,7 +63,9 @@ router.delete('/users/:id', (req, res) => {
 
 router.put('/users/:id', (req, res) => {
   console.log('/users/:id');
-  const { id } = req.params
+  const { id } = req.params;
+  console.log(id);
+  
   const updateValue = req.body
   console.log(updateValue)
   User.findOneAndUpdate({ _id: id }, updateValue, (err, user) => {
@@ -83,5 +86,6 @@ router.post('/users/checkAuth', async (req, res) => {
     }
   })
 })
+
 
 module.exports = router;

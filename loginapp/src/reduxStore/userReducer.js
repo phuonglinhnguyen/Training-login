@@ -46,9 +46,12 @@ export const addUser = (user) => {
       });
   }
 }
-export const updateUser = (user) => {
+
+export const updateUser = (user, id) => {
   return dispatch => {
-    fetch(`${api}/users/${user._id}`, {
+    console.log(user);
+    
+    fetch(`${api}/users/${id}`, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
@@ -107,6 +110,7 @@ export const checkAuth = (username, password, history, setOpen) => {
   }
 }
 
+
 // reducer
 export default (state = initState, action) => {
   const { payload } = action
@@ -146,8 +150,6 @@ export default (state = initState, action) => {
       return state;
   }
 }
-
-
 
 /**
  fetch(`${api}/users`)

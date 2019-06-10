@@ -35,6 +35,7 @@ class Login extends Component {
 
   logIn = () => {
     const { username, password } = this.state;
+    // const { history, setOpen } = this.props;
     const { history, setOpen, user } = this.props;
 
     // ---------- check username, password khac rong

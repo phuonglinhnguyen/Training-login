@@ -6,14 +6,15 @@ import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import "./header.css";
 import Login from "../loginComponents/login";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import withLoader from "../LoaderComponent/LoaderHOC.jsx";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Header = props => {
-  const {user} = props
+  const { user } = props;
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
@@ -29,12 +30,15 @@ const Header = props => {
       <ul className="nav justify-content-end">
         <li className="items-header">
           <Button className="btnLogin" onClick={handleClickOpen}>
-            {user === null ? 'Login' : 'Logout'}
-            </Button>
+            {user === null ? "Login" : "Logout"}
+            
+          </Button>
         </li>
 
         <li className="items-header">
-          <Link to="/manage-users/"><i className="fa fa-user-circle-o des" aria-hidden="true"></i></Link>
+          <Link to="/manage-users/">
+            <i className="fa fa-user-circle-o des" aria-hidden="true" />
+          </Link>
         </li>
       </ul>
       <Dialog
@@ -70,19 +74,19 @@ const Header = props => {
   //     </div>
   //   );
   // }
-}
+};
 
 Header.defaultProps = {
   user: null
-}
-const mapStateToProps = (state) => {
+};
+const mapStateToProps = state => {
   return {
     user: state.user.user
-  }
-}
+  };
+};
+const ContactListWithLoadIndicator = withLoader("loginuser")(Header);
 
 export default connect(
   mapStateToProps,
-  {
-  }
-)(Header)
+  {}
+)(Header);

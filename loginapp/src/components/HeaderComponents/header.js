@@ -7,7 +7,7 @@ import Slide from "@material-ui/core/Slide";
 import "./header.css";
 import Login from "../loginComponents/login";
 import { connect } from "react-redux";
-import withLoader from "../LoaderComponent/LoaderHOC.jsx";
+// import withLoader from "../LoaderComponent/LoaderHOC.jsx";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -34,7 +34,11 @@ const Header = props => {
             
           </Button>
         </li>
-
+        <li className="items-header">
+          <Link to="/login-temp/">
+            Login-temp
+          </Link>
+        </li>
         <li className="items-header">
           <Link to="/manage-users/">
             <i className="fa fa-user-circle-o des" aria-hidden="true" />
@@ -84,7 +88,7 @@ const mapStateToProps = state => {
     user: state.user.user
   };
 };
-const ContactListWithLoadIndicator = withLoader("loginuser")(Header);
+// const ContactListWithLoadIndicator = withLoader("loginuser")(Header);
 
 export default connect(
   mapStateToProps,

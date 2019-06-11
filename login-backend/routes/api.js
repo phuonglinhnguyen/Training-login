@@ -87,5 +87,17 @@ router.post('/users/checkAuth', async (req, res) => {
   })
 })
 
+router.post('/users/authenticate', async (req, res) => {
+  const {username, password} = req.params
+  
+  User.findOne({username}, (err, user) => {
+    if(user.password === password) {
+      res.json({ result: true, user })
+    } else {
+      res.json({ result: false })
+    }
+  })
+})
+
 
 module.exports = router;

@@ -6,8 +6,8 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import "./login.css";
-import iconUser from "./user.png";
+import "./css/login.css";
+import iconUser from "./img/user.png";
 import {checkAuth} from './../../reduxStore/userReducer'
 
 // 16.8.6 - hooks

@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 import "./css/main.css";
 import "./css/util.css";
 import avt from "./img/avatar-01.jpg";
+import { checkAuth } from "./../../reduxStore/userReducer";
 
 // 16.8.6 - hooks
 class Login_temp extends Component {
   state = {
     type: "input",
-    username: "",
-    password: "",
+    username: "admin",
+    password: "admin",
     err: []
   };
   _onChangeInput = e => {
@@ -19,31 +20,20 @@ class Login_temp extends Component {
     });
   };
 
-  logIn = () => {
+  logIn = (e) => {
+    e.preventDefault();
     const { username, password } = this.state;
-    // const { history, setOpen } = this.props;
-    const { history, setOpen, user } = this.props;
+    const { history } = this.props;
+    console.log({ username, password })
 
     // ---------- check username, password khac rong
-    this.props.checkAuth(username, password, history, setOpen);
+    this.props.checkAuth(username, password, history);
   };
+  check_empty = () => {
 
-  // checkVal = () => {
-  //   let input = $(".validate-input .input100");
-  //   $(".validate-form").on("submit", () => {
-  //     let check = true;
-  //     for (let i = 0; i < input.length; i++) {
-  //       check = false;
-  //     }
-  //   });
-  //   return check;
-  // };
-  // showVal=(input)=>{
-  //   let thisAlert=$(input).pa
-  // }
+  }
 
   render() {
-    console.log(this.props.user);
     return (
       <div className="limiter">
         <div className="container-login100">
@@ -63,7 +53,7 @@ class Login_temp extends Component {
                   name="username"
                   placeholder="Username"
                   onChange={this._onChangeInput}
-                  value={this.state.name}
+                  value={this.state.username}
                   required
                 />
                 <span className="focus-input100" />
@@ -90,21 +80,21 @@ class Login_temp extends Component {
                 </span>
               </div>
               <div className="container-login100-form-btn p-t-10">
-                <button className="login100-form-btn" onClick={this.logIn}>
+                <button className="login100-form-btn" onClick={this.logIn} type="submit">
                   Login
                 </button>
               </div>
-              <div className="text-center w-full p-t-25 p-b-230">
+              {/* <div className="text-center w-full p-t-25 p-b-230">
                 <a href="#" className="txt1">
                   Forgot Username / Password?
                 </a>
-              </div>
-              <div className="text-center w-full">
+              </div> */}
+              {/* <div className="text-center w-full">
                 <a className="txt1" href="#">
                   Create new account
                   <i className="fa fa-long-arrow-right" />
                 </a>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>
@@ -125,7 +115,7 @@ const mapStateToProps = state => {
 
 export default withRouter(
   connect(
-    mapStateToProps
-    // { checkAuth }
+    mapStateToProps,
+    { checkAuth }
   )(Login_temp)
 );

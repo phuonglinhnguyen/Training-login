@@ -4,7 +4,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import UserDetail from "../components/userDetail/userDetail";
 import AdminUser from "../components/adminComponents/adminUser";
 import Header from "../components/HeaderComponents/header";
-import Login from "../components/loginComponents/login-temp";
+import LoginTempt from "../components/loginComponents/login-temp";
+
 function AppRouter() {
   function Home(){
     return <h1>Hello My Home</h1>
@@ -15,7 +16,7 @@ function AppRouter() {
         <Header/>
         <Route path="/" exact component={Home} />
         <Route path="/user-details/" component={UserDetail} />
-        <Route path="/login-temp/" component={Login} />
+        <Route path="/login-temp/" component={LoginTempt} />
         <Route path="/manage-users/" component={AdminUser} />
       </div>
     </BrowserRouter>

@@ -47,10 +47,10 @@ router.get('/users/:id', (req, res) => {
 router.post('/users', (req, res) => {
   console.log('add new user api /users');
   try {
-    const { username, password } = req.body
-    console.log({ username, password });
+    const { username, password, email } = req.body
+    // console.log({ username, password });
 
-    const user = new User({ username, password, role: "USER" });
+    const user = new User({ username, password, role: "USER",email });
     user.save((err, _user) => {
       if (err) {
         throw err
@@ -106,7 +106,7 @@ router.post('/users/checkAuth', async (req, res) => {
     const { username, password } = req.body
     console.log({ username, password })
     User.findOne({ username }, (err, user) => {
-      if (user.password === password) {
+      if (user && user.password === password) {
         res.json({ result: true, user })
       } else {
         res.json({ result: false })

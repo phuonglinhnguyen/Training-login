@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./userDetail.css";
+import {getUser} from '../../services/StorageService';
 
 const users = {
   username: "linh",
@@ -15,8 +16,9 @@ class UserDetails extends Component {
   }
 
   render() {
-    const { user } = this.props;
-
+    // const { user } = this.props;
+    const user = getUser();
+    console.log(user);
     if (user === null) {
       return <div>Not log in</div>;
     }

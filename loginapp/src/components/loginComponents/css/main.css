@@ -89,6 +89,7 @@ textarea {
   border: none;
 }
 
+
 textarea:focus,
 input:focus {
   border-color: transparent !important;
@@ -188,7 +189,7 @@ iframe {
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  height: 913px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

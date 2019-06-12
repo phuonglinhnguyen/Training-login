@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import MaterialTable from "material-table";
 
 import AddBox from "@material-ui/icons/AddBox";
@@ -17,35 +17,29 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
-import { connect } from "react-redux";
-import {
-  getUsers,
-  addUser,
-  updateUser,
-  deleteUser,
-  startLoading
-} from "./../../reduxStore/userReducer";
+import {connect} from "react-redux";
+import {addUser, deleteUser, getUsers, startLoading, updateUser} from "./../../reduxStore/userReducer";
 // import withLoader from "../LoaderComponent/LoaderHOC.jsx";
+import {getUser} from '../../services/StorageService';
 
 const adminUser = props => {
-  const { users, loading } = props;
-  console.log(loading);
-
+  const {users, loading} = props;
+  const user = getUser();
+  console.log(user);
   useState(() => {
     props.getUsers();
   });
 
-  if (props.user && props.user.role !== "ADMIN") {
+  if (user && user.role !== "ADMIN") {
     props.history.push("/")
   }
 
-  if (users === null || loading === true) return <div className="loader" />;
-  console.log(props.user);
+  if (users === null || loading === true) return <div className="loader"/>;
 
   const columns = [
-    { title: "Username", field: "username" },
-    { title: "Password", field: "password" },
-    { title: "Email", field: "email" }
+    {title: "Username", field: "username"},
+    {title: "Password", field: "password"},
+    {title: "Email", field: "email"}
   ];
 
   const data = users;

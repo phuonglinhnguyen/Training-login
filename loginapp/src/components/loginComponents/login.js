@@ -91,7 +91,7 @@ class Login extends Component {
               />
             </div>
 
-            <button className="btnLogin" type="button" onClick={this.logIn}>
+            <button className="btnLoginform" type="button" onClick={this.logIn}>
               Login
             </button>
           </div>

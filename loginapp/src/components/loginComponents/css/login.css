@@ -1,9 +1,9 @@
 .Login {
-  width: 400px;
+  width: 320px;
   padding: 20px;
 }
 .loginform {
-  width: 300px;
+  /* width: 300px; */
   margin: auto;
   text-align: center;
   padding: 10px;
@@ -23,13 +23,13 @@
 .input-login {
   padding: 20px;
   /* -webkit-box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59);
--moz-box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59);
-box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59); */
+  -moz-box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59);
+  box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59); */
 }
-.btnLogin {
+.btnLoginform {
   border-radius: 10px;
   border: none;
-  background-color: #7c3256;
+  background: linear-gradient(to right, rgba(235,233,249,1) 0%, rgba(216,208,239,1) 50%, rgba(206,199,236,1) 51%, rgba(193,191,234,1) 100%);
   color: white;
   padding: 5px;
   margin: 10px 0;

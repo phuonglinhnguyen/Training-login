@@ -6,7 +6,9 @@ const TYPE = {
   ADD_USER: 'ADD_USER',
   UPDATE_USER: 'UPDATE_USER',
   DELETE_USER: 'DELETE_USER',
-  CHECK_USER: 'CHECK_USER'
+  CHECK_USER: 'CHECK_USER',
+  LOADING_USER: 'LOADING_USER',
+  LOG_OUT: 'LOG_OUT'
 }
 
 const initState = {
@@ -38,10 +40,11 @@ export const addUser = (user) => {
       },
       body: JSON.stringify(user), // body data type must match "Content-Type" header
     })
-      .then(res => {
+      .then(async res => {
+        const result = await res.json();
         dispatch({
           type: TYPE.ADD_USER,
-          payload: { user }
+          payload: { user: result.user }
         })
       });
   }
@@ -50,7 +53,8 @@ export const addUser = (user) => {
 export const updateUser = (user, id) => {
   return dispatch => {
     console.log(user);
-    
+    console.log(id);
+
     fetch(`${api}/users/${id}`, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -95,7 +99,12 @@ export const checkAuth = (username, password, history, setOpen) => {
         if (result) {
           // yes - chuyen trang user detail
           setOpen(false)
-          history.push("/user-details"); //chuyen trang
+          if (user.role === "USER") {
+            history.push("/user-details"); //chuyen trang
+          } else if (user.role === "ADMIN") {
+            history.push("/manage-users");
+          }
+
         } else {
           // no - thong bao username/password k dung
           alert("Sai username password");
@@ -110,20 +119,36 @@ export const checkAuth = (username, password, history, setOpen) => {
   }
 }
 
+export const startLoading = () => {
+  return dispatch => {
+    dispatch({
+      type: TYPE.LOADING_USER
+    })
+  }
+}
+
+export const logOut = () => {
+  return dispatch => {
+    console.log('logOut');
+    dispatch({
+      type: TYPE.LOG_OUT
+    })
+  }
+}
 
 // reducer
 export default (state = initState, action) => {
   const { payload } = action
   switch (action.type) {
     case TYPE.GET_USERS: {
-      console.log(payload.users)
       const users = payload.users
-      return { ...state, users }
+      return { ...state, users, loading: false }
     }
     case TYPE.ADD_USER: {
       const user = payload.user
       const users = [...state.users, user]
-      return { ...state, users }
+      console.log(state);
+      return { ...state, users, loading: false }
     }
     case TYPE.UPDATE_USER: {
       const user = payload.user
@@ -133,18 +158,25 @@ export default (state = initState, action) => {
         }
         return _user;
       })
-      return { ...state, users }
+      return { ...state, users, loading: false }
     }
     case TYPE.DELETE_USER: {
       const id = payload.id
       const users = state.users.filter(_user => {
         return _user._id !== id // true, false
       })
-      return { ...state, users }
+      return { ...state, users, loading: false }
     }
     case TYPE.CHECK_USER: {
       const user = payload.user
-      return { ...state, user }
+      return { ...state, user, loading: false }
+    }
+    case TYPE.LOADING_USER: {
+      return { ...state, loading: true }
+    }
+    case TYPE.LOG_OUT: {
+
+      return { ...state, user: null }
     }
     default:
       return state;

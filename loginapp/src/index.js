@@ -12,9 +12,12 @@ import 'font-awesome/css/font-awesome.min.css';
 import "./index.css";
 
 import UserReducer from "./reduxStore/userReducer";
+import MainReducer from "./reduxStore/mainReducer";
+
 
 const reducers = combineReducers({
-  user: UserReducer
+  user: UserReducer,
+  main: MainReducer
 });
 
 const store = createStore(reducers, applyMiddleware(ReduxThunk));

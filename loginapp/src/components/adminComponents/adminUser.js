@@ -22,21 +22,25 @@ import {
   getUsers,
   addUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  startLoading
 } from "./../../reduxStore/userReducer";
-import withLoader from "../LoaderComponent/LoaderHOC.jsx";
+// import withLoader from "../LoaderComponent/LoaderHOC.jsx";
 
 const adminUser = props => {
-  const { users } = props;
+  const { users, loading } = props;
+  console.log(loading);
 
   useState(() => {
     props.getUsers();
   });
 
-  if (users === null) return <div>Loading...</div>;
+  if (props.user && props.user.role !== "ADMIN") {
+    props.history.push("/")
+  }
 
-  // const [stateTable, setStateTable] = useState({
-  // });
+  if (users === null || loading === true) return <div className="loader" />;
+  console.log(props.user);
 
   const columns = [
     { title: "Username", field: "username" },
@@ -68,7 +72,6 @@ const adminUser = props => {
 
   return (
     <div className="admin">
-      <ContactListWithLoadIndicator />
       <MaterialTable
         title="Manage Users"
         icons={tableIcons}
@@ -76,19 +79,20 @@ const adminUser = props => {
         data={data}
         editable={{
           onRowAdd: newData =>
-            new Promise(dispatch => {
+            new Promise(resolve => {
+              resolve()
+              props.startLoading();
               props.addUser(newData);
-              window.location.reload();
             }),
           onRowUpdate: (newData, oldData) =>
-            new Promise(dispatch => {
+            new Promise(resolve => {
+              resolve()
               props.updateUser(newData, oldData._id);
-              window.location.reload();
             }),
           onRowDelete: oldData =>
-            new Promise(dispatch => {
+            new Promise(resolve => {
+              resolve()
               props.deleteUser(oldData._id);
-              window.location.reload();
             })
         }}
       />
@@ -102,10 +106,13 @@ adminUser.defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    users: state.user.users
+    users: state.user.users,
+    loading: state.user.loading,
+    user: state.user.user //user login
   };
 };
-const ContactListWithLoadIndicator = withLoader("adminuser")(adminUser);
+
+// const ContactListWithLoadIndicator = withLoader("users")(adminUser);
 
 export default connect(
   mapStateToProps,
@@ -113,6 +120,7 @@ export default connect(
     getUsers,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    startLoading
   }
 )(adminUser);

@@ -7,6 +7,8 @@ import Slide from "@material-ui/core/Slide";
 import "./header.css";
 import Login from "../loginComponents/login";
 import { connect } from "react-redux";
+import { logOut } from "../../reduxStore/userReducer"
+import { withRouter } from 'react-router-dom'
 // import withLoader from "../LoaderComponent/LoaderHOC.jsx";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -18,30 +20,31 @@ const Header = props => {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen() {
-    setOpen(true);
+    if (user === null) {
+      setOpen(true);
+    } else {
+      props.logOut()
+      props.history.push("/");
+    }
   }
 
   function handleClose() {
     setOpen(false);
   }
-
+  console.log(user);
+  
   return (
     <div className="nav-header">
       <ul className="nav justify-content-end">
         <li className="items-header">
           <Button className="btnLogin" onClick={handleClickOpen}>
             {user === null ? "Login" : "Logout"}
-            
+
           </Button>
         </li>
         <li className="items-header">
           <Link to="/login-temp/">
             Login-temp
-          </Link>
-        </li>
-        <li className="items-header">
-          <Link to="/manage-users/">
-            <i className="fa fa-user-circle-o des" aria-hidden="true" />
           </Link>
         </li>
       </ul>
@@ -90,7 +93,7 @@ const mapStateToProps = state => {
 };
 // const ContactListWithLoadIndicator = withLoader("loginuser")(Header);
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  {}
-)(Header);
+  { logOut }
+)(Header));

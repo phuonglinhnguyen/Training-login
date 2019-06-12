@@ -5,7 +5,7 @@ import "./css/main.css";
 import "./css/util.css";
 import avt from "./img/avatar-01.jpg";
 import { checkAuth } from "./../../reduxStore/userReducer";
-
+import { isEmpty } from 'lodash';
 // 16.8.6 - hooks
 class Login_temp extends Component {
   state = {
@@ -25,13 +25,18 @@ class Login_temp extends Component {
     const { username, password } = this.state;
     const { history } = this.props;
     console.log({ username, password })
-
+    if (isEmpty(username) || isEmpty(password)) {
+      return alert("Nhap username password");
+    }
     // ---------- check username, password khac rong
     this.props.checkAuth(username, password, history);
   };
-  check_empty = () => {
-
-  }
+// check_empty=()=>{
+//   const { username, password } = this.state;
+//   if (isEmpty(username) || isEmpty(password)) {
+//     return alert("Nhap username password");
+//   }
+// }
 
   render() {
     return (

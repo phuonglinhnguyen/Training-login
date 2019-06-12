@@ -87,11 +87,13 @@ const adminUser = props => {
           onRowUpdate: (newData, oldData) =>
             new Promise(resolve => {
               resolve()
+              props.startLoading();
               props.updateUser(newData, oldData._id);
             }),
           onRowDelete: oldData =>
             new Promise(resolve => {
               resolve()
+              props.startLoading();
               props.deleteUser(oldData._id);
             })
         }}

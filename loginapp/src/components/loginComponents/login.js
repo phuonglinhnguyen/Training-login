@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom'
-import {connect} from 'react-redux'
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -8,7 +8,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import "./css/login.css";
 import iconUser from "./img/user.png";
-import {checkAuth} from './../../reduxStore/userReducer'
+import { checkAuth } from "./../../reduxStore/userReducer";
 
 // 16.8.6 - hooks
 class Login extends Component {
@@ -39,16 +39,19 @@ class Login extends Component {
     const { history, setOpen, user } = this.props;
 
     // ---------- check username, password khac rong
-    this.props.checkAuth(username, password, history, setOpen)
+    this.props.checkAuth(username, password, history, setOpen);
   };
 
   render() {
-    console.log(this.props.user)
+    console.log(this.props.user);
     return (
       <div className="Login">
-        <form className="loginform">
+        <div className="logintitle">
           <h3>Login</h3>
           <img className="iconUser" src={iconUser} alt="icon user" />
+        </div>
+
+        <form className="loginform">
           <div className="input-login">
             <TextField
               label="User name"
@@ -57,13 +60,11 @@ class Login extends Component {
               className="input-items"
               type="text"
               value={this.state.name}
-              variant="outlined"
               required
             />
             <div className="pwd-items">
               <TextField
                 label="Password"
-                variant="outlined"
                 name="password"
                 onChange={this._onChangeInput}
                 className="input-items"
@@ -81,8 +82,8 @@ class Login extends Component {
                         {this.state.type === "input" ? (
                           <VisibilityOff />
                         ) : (
-                            <Visibility />
-                          )}
+                          <Visibility />
+                        )}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -102,12 +103,17 @@ class Login extends Component {
 
 Login.defaultProps = {
   user: null
-}
+};
 
 const mapStateToProps = state => {
   return {
     user: state.user.user
-  }
-}
+  };
+};
 
-export default withRouter(connect(mapStateToProps, {checkAuth})(Login));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { checkAuth }
+  )(Login)
+);

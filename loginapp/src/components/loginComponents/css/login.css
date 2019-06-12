@@ -1,13 +1,16 @@
+.Login {
+  width: 400px;
+  padding: 20px;
+}
 .loginform {
   width: 300px;
-  background-color: pink;
   margin: auto;
   text-align: center;
   padding: 10px;
   color: #7c3256;
 }
 .iconUser {
-  width: 50%;
+  width: 30%;
 }
 .input-items {
   width: 80% !important;
@@ -16,6 +19,12 @@
   margin-bottom: 10px !important;
   border: none;
   text-transform: capitalize !important;
+}
+.input-login {
+  padding: 20px;
+  /* -webkit-box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59);
+-moz-box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59);
+box-shadow: -5px -2px 49px 9px rgba(158,150,158,0.59); */
 }
 .btnLogin {
   border-radius: 10px;
@@ -26,19 +35,16 @@
   margin: 10px 0;
   cursor: pointer;
 }
-.pwd-items{
+.pwd-items {
   display: block;
   position: relative;
   text-transform: uppercase;
   font-weight: 700;
   width: 100%;
 }
-.show{
+.show {
   cursor: pointer;
   position: absolute;
-  /* bottom: 1px; */
-  /* height: 16px; */
-  /* right: ; */
   background: #7c3256;
 
   color: white;

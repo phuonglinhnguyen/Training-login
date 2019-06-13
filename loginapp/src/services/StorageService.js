@@ -1,14 +1,14 @@
 export const getUser = () => {
-    const user = localStorage.getItem('user');
+    const user = sessionStorage.getItem('user');
     return JSON.parse(user)
 };
 
 export const logOut = () => {
-    localStorage.clear();
+    sessionStorage.clear();
 };
 
 export const setUser = (user) => {
-    localStorage.setItem('user', JSON.stringify(user))
+    sessionStorage.setItem('user', JSON.stringify(user))
 };
 
 

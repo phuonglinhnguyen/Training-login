@@ -5,8 +5,8 @@ import "./css/main.css";
 import "./css/util.css";
 import avt from "./img/avatar-01.jpg";
 import { checkAuth } from "./../../reduxStore/userReducer";
-import { isEmpty } from 'lodash';
-// 16.8.6 - hooks
+import { isEmpty } from "lodash";
+
 class Login_temp extends Component {
   state = {
     type: "input",
@@ -14,29 +14,31 @@ class Login_temp extends Component {
     password: "admin",
     err: []
   };
+
   _onChangeInput = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
-  logIn = (e) => {
+  logIn = e => {
     e.preventDefault();
     const { username, password } = this.state;
     const { history } = this.props;
-    console.log({ username, password })
+    console.log({ username, password });
     if (isEmpty(username) || isEmpty(password)) {
       return alert("Nhap username password");
     }
     // ---------- check username, password khac rong
     this.props.checkAuth(username, password, history);
   };
-// check_empty=()=>{
-//   const { username, password } = this.state;
-//   if (isEmpty(username) || isEmpty(password)) {
-//     return alert("Nhap username password");
-//   }
-// }
+
+  // check_empty=()=>{
+  //   const { username, password } = this.state;
+  //   if (isEmpty(username) || isEmpty(password)) {
+  //     return alert("Nhap username password");
+  //   }
+  // }
 
   render() {
     return (
@@ -85,7 +87,11 @@ class Login_temp extends Component {
                 </span>
               </div>
               <div className="container-login100-form-btn p-t-10">
-                <button className="login100-form-btn" onClick={this.logIn} type="submit">
+                <button
+                  className="login100-form-btn"
+                  onClick={this.logIn}
+                  type="submit"
+                >
                   Login
                 </button>
               </div>

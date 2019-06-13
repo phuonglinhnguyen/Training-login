@@ -3,12 +3,6 @@ import { connect } from "react-redux";
 import "./userDetail.css";
 import {getUser} from '../../services/StorageService';
 
-const users = {
-  username: "linh",
-  email: "abc@gmail.com",
-  address: "asdassfff"
-};
-
 class UserDetails extends Component {
   constructor(props) {
     super(props);

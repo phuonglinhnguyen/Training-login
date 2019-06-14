@@ -14,8 +14,4 @@ export const setUser = (user) => {
 
 // export default className {}
 // export className {}
-// export const nameFunc = () => 
-
-// import
-// import
-// import
+// export const nameFunc = () => //import { nameFunc } from './..'

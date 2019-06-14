@@ -33,7 +33,7 @@ import "./adminUsers.css";
 const adminUser = props => {
   const { users, loading } = props;
   const user = getUser();
-  console.log(user);
+  // console.log(user);
   useState(() => {
     props.getUsers();
   });
@@ -77,10 +77,12 @@ const adminUser = props => {
     const MIN_LENGTH = 3;
     const MAX_LENGTH = 25;
     if (isEmpty(username)) {
+      window.alert("Don't null");
       return false;
     }
     const usernameLength = username.length;
     if (usernameLength <= MIN_LENGTH || usernameLength >= MAX_LENGTH) {
+      window.alert("Username must be minimum 3 and maximum 25 characters!! ");
       return false;
     }
     return true;
@@ -90,10 +92,12 @@ const adminUser = props => {
     const MIN_MAX_LENGTH = 8; // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&])[.\S]{6,}$/
     // const pwd = /^(?=.*[#$^+=!*()@%&])[.\S]{6,}$/;
     if (isEmpty(password)) {
+      window.alert("Don't null");
       return false;
     }
     const passwordLength = password.length;
     if (passwordLength !== MIN_MAX_LENGTH) {
+      window.alert("Password must be least 8 characters!! ");
       return false;
     }
 
@@ -102,9 +106,11 @@ const adminUser = props => {
 
   const _emailValidate = email => {
     // /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/
+    // /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/
     const checkEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const checkingResult = checkEmail.exec(email);
     if (checkingResult === null) {
+      window.alert("Email wrong!!! Exp: example@gmail.com");
       return false;
     }
     return true;
@@ -120,7 +126,7 @@ const adminUser = props => {
       props.startLoading();
       props.addUser(newData);
     } else {
-      window.alert("Something wrong!!!");
+      // window.alert("Something wrong!!!");
       resolve();
     }
   };
@@ -131,7 +137,7 @@ const adminUser = props => {
       props.startLoading();
       props.updateUser(newData, oldData);
     } else {
-      window.alert("Something wrong!!!");
+      // window.alert("Something wrong!!!");
       resolve();
     }
   };
@@ -194,8 +200,6 @@ const mapStateToProps = state => {
     user: state.user.user //user login
   };
 };
-
-// const ContactListWithLoadIndicator = withLoader("users")(adminUser);
 
 export default connect(
   mapStateToProps,

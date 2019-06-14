@@ -7,27 +7,36 @@ import ReduxThunk from "redux-thunk";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 // --
 import App from "./App";
-import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.min.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.min.css";
 import "./index.css";
-
+import logger from "redux-logger";
 import UserReducer from "./reduxStore/userReducer";
-import MainReducer from "./reduxStore/mainReducer";
-
+import { composeWithDevTools } from "redux-devtools-extension";
+// import { ConnectedRouter } from "connected-react-router";
+// import configureStore, { history } from "./reduxStore/configureStore";
+// import { Route, Switch } from "react-router"; // react-router v4/v5
 
 const reducers = combineReducers({
-  user: UserReducer,
-  main: MainReducer
+  user: UserReducer
 });
 
-const store = createStore(reducers, applyMiddleware(ReduxThunk));
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(ReduxThunk, logger))
+);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-  ,
+    {/* <ConnectedRouter history={history}> */}
+      <BrowserRouter>
+        <App />
+        {/* <Switch>
+          <Route exact path="/" render={() => (<div>Match</div>)} />
+          <Route render={() => (<div>Miss</div>)} />
+        </Switch> */}
+      </BrowserRouter>
+    {/* </ConnectedRouter> */}
+  </Provider>,
   document.getElementById("root")
 );

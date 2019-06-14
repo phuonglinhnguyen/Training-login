@@ -26,19 +26,15 @@ class Login_temp extends Component {
     const { username, password } = this.state;
     const { history } = this.props;
     console.log({ username, password });
-    if (isEmpty(username) || isEmpty(password)) {
-      return alert("Nhap username password");
+
+    if (isEmpty(username)) {
+      return alert("Nhap username");
+    } else if (isEmpty(password)) {
+      return alert("Nhap password");
     }
     // ---------- check username, password khac rong
     this.props.checkAuth(username, password, history);
   };
-
-  // check_empty=()=>{
-  //   const { username, password } = this.state;
-  //   if (isEmpty(username) || isEmpty(password)) {
-  //     return alert("Nhap username password");
-  //   }
-  // }
 
   render() {
     return (

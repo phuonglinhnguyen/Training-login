@@ -1,4 +1,3 @@
-// import React, { Component } from "react";
 import React from "react";
 import { withRouter } from "react-router-dom";
 import Dialog from "@material-ui/core/Dialog";
@@ -7,7 +6,6 @@ import "./header.css";
 import Login from "../loginComponents/login";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-// import {logOut} from "../../reduxStore/userReducer"
 import { getUser, logOut } from "../../services/StorageService";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -43,8 +41,6 @@ const Header = props => {
   function handleClose() {
     setOpen(false);
   }
-
-  // console.log(user);
 
   return (
     <div className="nav-header">

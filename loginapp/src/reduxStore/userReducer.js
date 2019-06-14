@@ -13,10 +13,16 @@ const TYPE = {
   LOG_OUT: "LOG_OUT"
 };
 
+const contentType = {
+  headers: {
+    "Content-Type": "application/json"
+  }
+};
+
 const initState = {};
 
 // action
-export const getUsers = () => {0
+export const getUsers = () => {
   return dispatch => {
     fetch(`${api}/users`).then(res => {
       res.json().then(users => {
@@ -29,6 +35,25 @@ export const getUsers = () => {0
     });
   };
 };
+
+// export const addUser = user =>async(dispatch)=>{
+//   let result = await(await fetch('',{})).json()
+
+// }
+
+// export const addUser = user => async dispatch => {
+//   let result = await (await fetch(`${api}/users`, {
+//     method: "POST", // *GET, POST, PUT, DELETE, etc.
+//     contentType,
+//     body: JSON.stringify(user)
+//   })).json();
+//   console.log("result:",result);
+  
+//   dispatch({
+//     type: TYPE.ADD_USER,
+//     payload: { user: result.user }
+//   });
+// };
 
 export const addUser = user => {
   return dispatch => {

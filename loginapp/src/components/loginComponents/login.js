@@ -7,7 +7,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import "./css/login.css";
-import iconUser from "./img/user.png";
+// import iconUser from "./img/user.png";
 import { checkAuth } from "./../../reduxStore/userReducer";
 
 // 16.8.6 - hooks
@@ -48,7 +48,7 @@ class Login extends Component {
       <div className="Login">
         <div className="logintitle">
           <h3>Login</h3>
-          <img className="iconUser" src={iconUser} alt="icon user" />
+          {/* <img className="iconUser" src={iconUser} alt="icon user" /> */}
         </div>
 
         <form className="loginform">

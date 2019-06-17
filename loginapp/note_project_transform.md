@@ -1,4 +1,6 @@
-{
+{//npm config set registry "https://nexus.digi-texx.vn/repository/npm/"
+https://git.digi-texx.vn/users/sign_in
+
  "name": "DA_6", (*)
   "cron_trigger": "0/10 * * * * ?", (*)
   "active": true, 

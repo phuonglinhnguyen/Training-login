@@ -36,9 +36,10 @@ export const getUsers = () => {
   };
 };
 
-// export const addUser = user =>async(dispatch)=>{
-//   let result = await(await fetch('',{})).json()
-
+// export const addUser = (user) => {
+//   return async(dispatch)=>{
+//     let result = await(await fetch('',{})).json()
+//   }
 // }
 
 // export const addUser = user => async dispatch => {
@@ -72,6 +73,24 @@ export const addUser = user => {
     });
   };
 };
+
+// export const addUser2 = user => {
+//   return dispatch => {
+//     fetch(`${api}/users`, {
+//       method: "POST", // *GET, POST, PUT, DELETE, etc.
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(user) // body data type must match "Content-Type" header
+//     }).then(async res => {
+//       const result = await res.json();
+//       dispatch({
+//         type: TYPE.ADD_USER,
+//         payload: { user: result.user }
+//       });
+//     });
+//   };
+// };
 
 export const updateUser = (user, id) => {
   return dispatch => {

@@ -13,7 +13,7 @@
     "material-table": "^1.39.0",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
-    "react-admin": "^2.9.2",
+    "react-admin": "^4.7.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-redux-form": "^1.16.13",
